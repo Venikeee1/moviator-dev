@@ -1,0 +1,130 @@
+$break-extra-small: 359px;
+$break-small-mobile: 560px;
+$break-mobile: 767px;
+$break-tablet: 1024px;
+$desk-small: 1200px;
+$desk-middle: 1366px;
+$break-large: 1660px;
+$break-extra-large: 1900px;
+$maxHeight: 800px;
+
+@mixin media($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    @content;
+  }
+}
+
+
+@mixin mediaWH($width, $height) {
+  @media only screen and (max-width: $width) and (max-height: $height){
+    @content;
+  }
+}
+
+
+@mixin calc-lh($fontSize, $lineHeight) {
+  line-height: $lineHeight / $fontSize;
+}
+
+
+
+@mixin fs($size) {
+  @if map_has_key($fontSize, $size) {
+    $size: map_get($fontSize, $size);
+    font-size: $size;
+  }
+}
+@mixin lh($size) {
+  @if map_has_key($lineHeight, $size) {
+    $size: map_get($lineHeight, $size);
+    line-height: $size;
+  }
+}
+@mixin inline-block(){
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+}
+
+@mixin trans3d($x, $y){
+  transform: translate3d($x, $y, 0);
+}
+@mixin rotate($deg){
+  transform: rotate($deg);
+}
+
+@mixin color($color, $type) {
+  @if map_has_key($colors, $color) {
+    $color: map_get($colors, $color);
+    #{$type}:$color;
+  }
+}
+@mixin spacings($size, $type) {
+  @if map_has_key($spacings, $size) {
+    $size: map_get($spacings, $size);
+    #{$type}:$size;
+  }
+}
+
+@mixin cf(){
+  & {
+    *zoom: 1;
+  }
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin cf-off(){
+  & {
+    *zoom: normal;
+  }
+  &:before,
+  &:after {
+    display: none;
+  }
+}
+
+@mixin input-placeholder( $color, $opacity: ".5" ) {
+  @if map_has_key($colors, $color) {
+    $color: map_get($colors, $color);
+    &:-moz-placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+    &::-moz-placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+    &:-ms-input-placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+    &::-ms-input-placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+    &::-webkit-input-placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+    &::placeholder {
+      color: $color;
+      opacity: $opacity;
+    }
+  }
+}
+
+
